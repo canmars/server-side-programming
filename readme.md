@@ -20,3 +20,12 @@ git
 github ---> vercel bağla
 
 pipeline
+
+#### JavaScript
+
+Nedir?
+    Programlama dili değildir. 1995. Dinamik WebSayfaları tasarlamaya yarar. Script dilidir.  
+
+JBasic
+
+Haftaya Not: JavaScript çalışılacak.
