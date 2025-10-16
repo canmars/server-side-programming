@@ -29,3 +29,8 @@ Nedir?
 JBasic
 
 Haftaya Not: JavaScript çalışılacak.
+
+
+## Hafta_5
+
+
