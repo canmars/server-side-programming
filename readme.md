@@ -114,3 +114,10 @@ npm init >> package oluşturulması
 epra script
 
 javascript dili
+
+
+npm i nodemon
+dependcied kısmı önemli
+node_modules kısmı geldi
+    29 packages
+    
