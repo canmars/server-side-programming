@@ -4,12 +4,9 @@
   "description": "deu ybs 3. sınıf sunucu tabanlı programlama dersi notlarını içerir.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/canmars/server-side-progamming.git"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+},
   "keywords": [
     "ders",
     "bilgisayar",
@@ -17,9 +14,5 @@
     "backend"
   ],
   "author": "canmars",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/canmars/server-side-progamming/issues"
-  },
-  "homepage": "https://github.com/canmars/server-side-progamming#readme"
+  "license": "ISC"
 }

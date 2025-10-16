@@ -110,3 +110,7 @@ npm init >> package oluşturulması
 
     package.js oluşturulması
 
+
+epra script
+
+javascript dili
