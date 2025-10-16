@@ -1,0 +1,25 @@
+{
+  "name": "server-side-programming-2025-deu",
+  "version": "1.0.0",
+  "description": "deu ybs 3. sınıf sunucu tabanlı programlama dersi notlarını içerir.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canmars/server-side-progamming.git"
+  },
+  "keywords": [
+    "ders",
+    "bilgisayar",
+    "sunucu",
+    "backend"
+  ],
+  "author": "canmars",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/canmars/server-side-progamming/issues"
+  },
+  "homepage": "https://github.com/canmars/server-side-progamming#readme"
+}
