@@ -1,10 +1,11 @@
 {
+  "type": "module",
   "name": "server-side-programming-2025-deu",
   "version": "1.0.0",
   "description": "deu ybs 3. sınıf sunucu tabanlı programlama dersi notlarını içerir.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon JavaScript/app.js",
     "start": "nodemon index.js"
   },
   "keywords": [
@@ -15,8 +16,11 @@
   ],
   "author": "canmars",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "nodemon": "^3.1.10"
   },
-  "devDependencies": {}
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
 }
