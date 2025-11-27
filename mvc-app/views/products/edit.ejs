@@ -1,0 +1,92 @@
+<%# 
+    Ürün Düzenleme Formu
+    Controller: productController.edit (form gösterimi)
+    Route: GET /products/:id/edit
+%>
+
+<h1>Ürün Düzenle</h1>
+
+<%# Hata Mesajları %>
+<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+    <div class="error-messages">
+        <h3>Lütfen aşağıdaki hataları düzeltin:</h3>
+        <ul>
+            <% errors.forEach(error => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
+
+<% if (typeof error !== 'undefined' && error) { %>
+    <div class="error-message">
+        <p><%= error %></p>
+    </div>
+<% } %>
+
+<% if (product) { %>
+    <%# Ürün Düzenleme Formu %>
+    <form method="POST" action="/products/<%= product.id %>?_method=PUT" class="product-form">
+        <input type="hidden" name="_method" value="PUT">
+        
+        <div class="form-group">
+            <label for="name">Ürün Adı *</label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                value="<%= product.name %>"
+                required
+                placeholder="Ürün adı"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="description">Açıklama</label>
+            <textarea 
+                id="description" 
+                name="description" 
+                rows="4"
+                placeholder="Ürün açıklaması"
+            ><%= product.description || '' %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Fiyat *</label>
+            <input 
+                type="number" 
+                id="price" 
+                name="price" 
+                value="<%= product.price %>"
+                required
+                step="0.01"
+                min="0"
+                placeholder="0.00"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stok Miktarı *</label>
+            <input 
+                type="number" 
+                id="stock" 
+                name="stock" 
+                value="<%= product.stock %>"
+                required
+                min="0"
+                placeholder="0"
+            >
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+            <a href="/products/<%= product.id %>" class="btn btn-cancel">İptal</a>
+        </div>
+    </form>
+<% } else { %>
+    <div class="error-message">
+        <p>Ürün bulunamadı.</p>
+        <a href="/products" class="btn btn-back">Ürün Listesine Dön</a>
+    </div>
+<% } %>
+

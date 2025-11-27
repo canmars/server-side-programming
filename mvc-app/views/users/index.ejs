@@ -1,0 +1,88 @@
+<%# 
+    Kullanıcı Listesi Sayfası
+    Controller: userController.index
+    Route: GET /users
+%>
+
+<h1>Kullanıcılar</h1>
+
+<div class="actions">
+    <a href="/users/create" class="btn btn-primary">Yeni Kullanıcı Ekle</a>
+</div>
+
+<%# Arama Formu %>
+<form method="GET" action="/users" class="search-form">
+    <input 
+        type="text" 
+        name="search" 
+        placeholder="İsim veya email ile ara..." 
+        value="<%= search || '' %>"
+    >
+    <button type="submit">Ara</button>
+    <% if (search) { %>
+        <a href="/users" class="btn-clear">Temizle</a>
+    <% } %>
+</form>
+
+<%# Kullanıcı Listesi %>
+<% if (users && users.length > 0) { %>
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>İsim</th>
+                <th>Email</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td class="actions">
+                        <a href="/users/<%= user.id %>" class="btn btn-view">Görüntüle</a>
+                        <a href="/users/<%= user.id %>/edit" class="btn btn-edit">Düzenle</a>
+                        <form method="POST" action="/users/<%= user.id %>?_method=DELETE" style="display: inline;">
+                            <button type="submit" class="btn btn-delete" onclick="return confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?')">Sil</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <%# Sayfalama Bilgisi %>
+    <% if (totalPages > 1) { %>
+        <div class="pagination">
+            <p>
+                Toplam <%= totalUsers %> kullanıcı, 
+                Sayfa <%= currentPage %> / <%= totalPages %>
+            </p>
+            <div class="pagination-links">
+                <% if (currentPage > 1) { %>
+                    <a href="/users?page=<%= currentPage - 1 %><%= search ? '&search=' + search : '' %>">Önceki</a>
+                <% } %>
+                
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <% if (i === currentPage) { %>
+                        <span class="current-page"><%= i %></span>
+                    <% } else { %>
+                        <a href="/users?page=<%= i %><%= search ? '&search=' + search : '' %>"><%= i %></a>
+                    <% } %>
+                <% } %>
+                
+                <% if (currentPage < totalPages) { %>
+                    <a href="/users?page=<%= currentPage + 1 %><%= search ? '&search=' + search : '' %>">Sonraki</a>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+<% } else { %>
+    <div class="empty-state">
+        <p>Henüz kullanıcı bulunmamaktadır.</p>
+        <a href="/users/create" class="btn btn-primary">İlk Kullanıcıyı Ekle</a>
+    </div>
+<% } %>
+
