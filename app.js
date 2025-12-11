@@ -9,6 +9,7 @@ import { errorHandler, notFoundHandler } from './middlewares/errorHandler.js';
 
 // Router'lar
 import homeRoutes from './routers/homeRoutes.js';
+import ogrenciRoutes from './routers/ogrenciRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,6 +57,12 @@ app.use(express.static('public'));
 // Home routes (Ana sayfa)
 // Tüm / ile başlayan istekler homeRoutes'a yönlendirilir
 app.use('/', homeRoutes);
+
+// BURAYA DİKKAT: API route'u bağlama
+// app.use('/api/ogrenciler', ogrenciRoutes) → /api/ogrenciler ile başlayan tüm istekler ogrenciRoutes'a yönlendirilir
+// Örnek: GET /api/ogrenciler → ogrenciRoutes içindeki GET / endpoint'ine gider
+// Önemli: Route'lar middleware'lerden SONRA, error handler'lardan ÖNCE olmalı
+app.use('/api/ogrenciler', ogrenciRoutes);
 
 // ============================================
 // ERROR HANDLING (En sonda!)

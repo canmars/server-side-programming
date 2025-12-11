@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Yönetim Sistemi</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/">🏠 Ana Sayfa</a>
+        <a href="/ogrenciler">👥 Öğrenciler</a>
+    </nav>
+    
+    <div class="container">
+        <h1>Öğrenci Yönetim Sistemi</h1>
+        
+        <!-- BURAYA DİKKAT: HTML form yapısı -->
+        <!-- Form, kullanıcıdan veri almak için kullanılır -->
+        <!-- action: Form gönderildiğinde nereye gidecek (boş = aynı sayfa) -->
+        <!-- method: GET veya POST (varsayılan GET) -->
+        <!-- onsubmit: Form gönderilmeden önce JavaScript fonksiyonu çalışır -->
+        <form id="ogrenciForm" class="form-container">
+            <h2>Yeni Öğrenci Ekle</h2>
+            
+            <!-- BURAYA DİKKAT: Input elementleri -->
+            <!-- name: Form gönderildiğinde bu isimle gönderilir -->
+            <!-- id: JavaScript'ten erişmek için -->
+            <!-- required: Zorunlu alan -->
+            <div class="form-group">
+                <label for="ogrNo">Öğrenci No:</label>
+                <input type="number" id="ogrNo" name="Ogr_No" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ogrAd">Ad:</label>
+                <input type="text" id="ogrAd" name="Ogr_Ad" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ogrSoyad">Soyad:</label>
+                <input type="text" id="ogrSoyad" name="Ogr_Soyad" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ogrGirisTarih">Giriş Tarihi:</label>
+                <input type="date" id="ogrGirisTarih" name="Ogr_Giris_Tarih" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="bolumKod">Bölüm Kodu:</label>
+                <input type="number" id="bolumKod" name="Bolum_Kod" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fakulteKod">Fakülte Kodu:</label>
+                <input type="number" id="fakulteKod" name="Fakulte_Kod" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ogrTel">Telefon:</label>
+                <input type="number" id="ogrTel" name="Ogr_Tel" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ogrAdres">Adres:</label>
+                <input type="text" id="ogrAdres" name="Ogr_Adres" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ogrDosyaNo">Dosya No:</label>
+                <input type="number" id="ogrDosyaNo" name="Ogr_Dosya_No" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="turKod">Öğrenim Türü Kodu:</label>
+                <input type="number" id="turKod" name="Tur_Kod" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="durumKod">Durum Kodu:</label>
+                <input type="number" id="durumKod" name="Durum_Kod" required>
+            </div>
+            
+            <!-- BURAYA DİKKAT: Form submit butonu -->
+            <!-- type="submit" → Form'u gönderir -->
+            <!-- type="button" → Sadece tıklanabilir, form göndermez -->
+            <button type="submit" id="submitBtn">Öğrenci Ekle</button>
+            <button type="button" id="cancelBtn" style="display: none;">İptal</button>
+        </form>
+        
+        <!-- BURAYA DİKKAT: HTML tablo yapısı -->
+        <!-- Tablo, verileri göstermek için kullanılır -->
+        <!-- thead: Tablo başlıkları -->
+        <!-- tbody: Tablo içeriği (JavaScript ile doldurulacak) -->
+        <div class="table-container">
+            <h2>Öğrenci Listesi</h2>
+            <table id="ogrenciTable">
+                <thead>
+                    <tr>
+                        <th>Öğrenci No</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Giriş Tarihi</th>
+                        <th>Bölüm Kodu</th>
+                        <th>Fakülte Kodu</th>
+                        <th>Telefon</th>
+                        <th>Adres</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody id="ogrenciTableBody">
+                    <!-- BURAYA DİKKAT: Tablo içeriği JavaScript ile doldurulacak -->
+                    <!-- Buraya dinamik olarak satırlar eklenecek -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- BURAYA DİKKAT: JavaScript dosyası bağlama -->
+    <!-- script tag'i ile JavaScript dosyası sayfaya eklenir -->
+    <!-- defer: Sayfa yüklendikten sonra script çalışır -->
+    <script src="/js/ogrenciler.js" defer></script>
+</body>
+</html>
+

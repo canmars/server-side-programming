@@ -29,6 +29,21 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index.html'))
 })
 
+/**
+ * Öğrenciler sayfası
+ * 
+ * GET /ogrenciler
+ * 
+ * BURAYA DİKKAT: HTML dosyası gönderme
+ * - res.sendFile() → HTML dosyasını gönderir
+ * - path.join() → Dosya yolu oluşturur (işletim sistemi bağımsız)
+ * 
+ * Örnek: http://localhost:3000/ogrenciler
+ */
+router.get('/ogrenciler', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/ogrenciler.html'))
+})
+
 // Router'ı export et
 export default router
 
