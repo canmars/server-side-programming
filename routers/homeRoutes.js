@@ -10,6 +10,11 @@
  */
 
 import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const router = express.Router()
 
@@ -21,10 +26,7 @@ const router = express.Router()
  * Örnek: http://localhost:3000/
  */
 router.get('/', (req, res) => {
-    res.render('index', { 
-        title: 'Ana Sayfa',
-        layout: 'layouts/main'
-    })
+    res.sendFile(path.join(__dirname, '../views/index.html'))
 })
 
 // Router'ı export et

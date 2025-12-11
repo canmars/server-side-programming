@@ -1,26 +1,28 @@
 {
   "type": "module",
-  "name": "server-side-programming-2025-deu",
+  "name": "server-side-programming",
   "version": "1.0.0",
-  "description": "deu ybs 3. sınıf sunucu tabanlı programlama dersi notlarını içerir.",
+  "description": "DEÜ YBS 3. Sınıf Sunucu Tabanlı Programlama - MVC Uygulaması",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon JavaScript/app.js",
-    "start": "nodemon index.js"
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "ders",
-    "bilgisayar",
-    "sunucu",
-    "backend"
+    "express",
+    "mvc",
+    "nodejs",
+    "html",
+    "mysql"
   ],
-  "author": "canmars",
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^3.1.10"
-  },
   "dependencies": {
     "dotenv": "^17.2.3",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mysql2": "^3.15.3",
+    "nodemon": "^3.1.11"
   }
 }
+

@@ -12,6 +12,12 @@
  * Önemli: Error handler middleware'i EN SONDA tanımlanmalıdır!
  */
 
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 /**
  * 404 Not Found Handler
  * Tanımlanmamış route'lar için
@@ -68,14 +74,9 @@ export const errorHandler = (err, req, res, next) => {
         errorResponse.error.stack = err.stack
     }
     
-    // HTML response (EJS template kullanarak)
+    // HTML response (HTML dosyası gönder)
     if (req.accepts('html')) {
-        return res.status(statusCode).render('error', {
-            title: `Hata ${statusCode}`,
-            message: message,
-            // Development modunda stack trace göster
-            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
-        })
+        return res.status(statusCode).sendFile(path.join(__dirname, '../views/error.html'))
     }
     
     // JSON response (API istekleri için)
@@ -119,11 +120,7 @@ export const validationErrorHandler = (err, req, res, next) => {
     
     // HTML response
     if (req.accepts('html')) {
-        return res.status(400).render('error', {
-            title: 'Validasyon Hatası',
-            message: 'Girdiğiniz bilgilerde hata var.',
-            errors: errors
-        })
+        return res.status(400).sendFile(path.join(__dirname, '../views/error.html'))
     }
     
     // JSON response
