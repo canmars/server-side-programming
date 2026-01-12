@@ -10,6 +10,7 @@ import { errorHandler, notFoundHandler } from './middlewares/errorHandler.js';
 // Router'lar
 import homeRoutes from './routers/homeRoutes.js';
 import ogrenciRoutes from './routers/ogrenciRoutes.js';
+import authRoutes from './routers/authRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,6 +64,15 @@ app.use('/', homeRoutes);
 // Örnek: GET /api/ogrenciler → ogrenciRoutes içindeki GET / endpoint'ine gider
 // Önemli: Route'lar middleware'lerden SONRA, error handler'lardan ÖNCE olmalı
 app.use('/api/ogrenciler', ogrenciRoutes);
+
+// BURAYA DİKKAT: Auth API route'u bağlama
+// app.use('/api/auth', authRoutes) → /api/auth ile başlayan tüm istekler authRoutes'a yönlendirilir
+// Örnek: POST /api/auth/login → authRoutes içindeki POST /login endpoint'ine gider
+// NE ZAMAN ÇALIŞIR?
+// → Kullanıcı login formunu gönderdiğinde
+// → Frontend'den POST /api/auth/login isteği geldiğinde
+console.log('🔐 Auth route bağlandı: /api/auth → authRoutes')
+app.use('/api/auth', authRoutes);
 
 // ============================================
 // ERROR HANDLING (En sonda!)

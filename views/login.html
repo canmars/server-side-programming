@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - Öğrenci Yönetim Sistemi</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- BURAYA DİKKAT: Toast CSS dosyası bağlama
+     * Toast bildirimlerinin görünümü için
+     * Bu dosya toast'ların nasıl görüneceğini belirler
+     -->
+    <link rel="stylesheet" href="/css/toast.css">
+    <style>
+        /* BURAYA DİKKAT: CSS stilleri
+         * Login sayfası için özel stiller
+         * Bu stiller sadece bu sayfada geçerli
+         */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #2196f3;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .login-btn:hover {
+            background: #1976d2;
+        }
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/">🏠 Ana Sayfa</a>
+    </nav>
+    
+    <div class="login-container">
+        <h1>🔐 Giriş Yap</h1>
+        
+        <!-- BURAYA DİKKAT: Hata mesajı kutusu
+         * JavaScript ile doldurulacak
+         * Hata olduğunda görünecek
+         -->
+        <div id="errorMessage" class="error-message"></div>
+        
+        <!-- BURAYA DİKKAT: Login formu
+         * action: Boş (JavaScript ile göndereceğiz)
+         * method: POST (ama JavaScript ile göndereceğiz, form'un varsayılan davranışını engelleyeceğiz)
+         * id: JavaScript'ten erişmek için
+         -->
+        <form id="loginForm">
+            <!-- BURAYA DİKKAT: Öğrenci numarası input'u
+             * type="number": Sadece sayı girişi
+             * name="ogrNo": Form gönderildiğinde bu isimle gönderilir
+             * id="ogrNo": JavaScript'ten erişmek için
+             * required: Zorunlu alan (tarayıcı kontrolü)
+             * autofocus: Sayfa yüklendiğinde bu alana odaklanır
+             -->
+            <div class="form-group">
+                <label for="ogrNo">Öğrenci Numarası:</label>
+                <input 
+                    type="number" 
+                    id="ogrNo" 
+                    name="ogrNo" 
+                    placeholder="Örn: 2014800647" 
+                    required 
+                    autofocus
+                >
+            </div>
+            
+            <!-- BURAYA DİKKAT: Şifre input'u
+             * type="password": Giriş yapılırken karakterler gizlenir (••••)
+             * name="password": Form gönderildiğinde bu isimle gönderilir
+             * id="password": JavaScript'ten erişmek için
+             * required: Zorunlu alan
+             -->
+            <div class="form-group">
+                <label for="password">Şifre:</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Şifrenizi girin" 
+                    required
+                >
+            </div>
+            
+            <!-- BURAYA DİKKAT: Giriş butonu
+             * type="submit": Form'u gönderir
+             * id: JavaScript'ten erişmek için
+             * onclick: Butona tıklandığında (ama biz form submit event'ini kullanacağız)
+             -->
+            <button type="submit" id="loginBtn" class="login-btn">
+                🔐 Giriş Yap
+            </button>
+        </form>
+        
+        <!-- BURAYA DİKKAT: Test bilgisi
+         * Geliştirme aşamasında test için
+         -->
+        <div style="margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 12px; color: #666;">
+            <strong>Test için:</strong><br>
+            Öğrenci No: 2014800647<br>
+            Şifre: (şimdilik öğrenci numarası yeterli, şifre kontrolü sonra eklenecek)
+        </div>
+    </div>
+    
+    <!-- BURAYA DİKKAT: JavaScript dosyaları bağlama
+     * 
+     * Sıralama önemli!
+     * 1. toast.js → Önce toast sistemi yüklenmeli (diğer dosyalar kullanacak)
+     * 2. login.js → Sonra login JavaScript'i yüklenir
+     * 
+     * defer: Sayfa yüklendikten sonra script çalışır
+     * 
+     * NE ZAMAN ÇALIŞIR?
+     * → HTML yüklendikten sonra
+     * → Önce toast.js, sonra login.js çalışır
+     -->
+    <script src="/js/toast.js" defer></script>
+    <script src="/js/login.js" defer></script>
+</body>
+</html>
+

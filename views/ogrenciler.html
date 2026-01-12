@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Öğrenci Yönetim Sistemi</title>
     <link rel="stylesheet" href="/css/style.css">
+    <!-- BURAYA DİKKAT: Toast CSS dosyası bağlama
+     * Toast bildirimlerinin görünümü için
+     * Bu dosya toast'ların nasıl görüneceğini belirler
+     -->
+    <link rel="stylesheet" href="/css/toast.css">
 </head>
 <body>
     <nav class="navbar">
@@ -14,6 +19,22 @@
     
     <div class="container">
         <h1>Öğrenci Yönetim Sistemi</h1>
+        
+        <!-- BURAYA DİKKAT: Bilgi kutusu - Sayfa yüklendiğinde ne olduğunu açıklar -->
+        <div id="pageInfo" style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #2196f3;">
+            <h3 style="margin-top: 0;">📚 Sayfa Yüklendiğinde Ne Oluyor?</h3>
+            <p><strong>F5 yaptığınızda veya sayfaya ilk geldiğinizde:</strong></p>
+            <ol>
+                <li><strong>HTML yüklenir</strong> → Bu sayfa (ogrenciler.html) tarayıcıya gelir</li>
+                <li><strong>JavaScript yüklenir</strong> → ogrenciler.js dosyası çalışır</li>
+                <li><strong>DOMContentLoaded event</strong> → HTML hazır olduğunda tetiklenir</li>
+                <li><strong>loadOgrenciler() çalışır</strong> → API'den öğrenci listesi çekilir</li>
+                <li><strong>renderOgrenciler() çalışır</strong> → Liste tabloya yazılır</li>
+                <li><strong>Form dinlenmeye başlar</strong> → "Öğrenci Ekle" butonu hazır olur</li>
+            </ol>
+            <p><strong>💡 İpucu:</strong> F12 tuşuna basıp Console sekmesini açarsanız, her adımı detaylı görebilirsiniz!</p>
+            <button onclick="document.getElementById('pageInfo').style.display='none'" style="margin-top: 10px; padding: 5px 15px; background: #2196f3; color: white; border: none; border-radius: 3px; cursor: pointer;">Kapat</button>
+        </div>
         
         <!-- BURAYA DİKKAT: HTML form yapısı -->
         <!-- Form, kullanıcıdan veri almak için kullanılır -->
@@ -117,9 +138,19 @@
         </div>
     </div>
     
-    <!-- BURAYA DİKKAT: JavaScript dosyası bağlama -->
-    <!-- script tag'i ile JavaScript dosyası sayfaya eklenir -->
-    <!-- defer: Sayfa yüklendikten sonra script çalışır -->
+    <!-- BURAYA DİKKAT: JavaScript dosyaları bağlama
+     * 
+     * Sıralama önemli!
+     * 1. toast.js → Önce toast sistemi yüklenmeli (diğer dosyalar kullanacak)
+     * 2. ogrenciler.js → Sonra öğrenciler JavaScript'i yüklenir
+     * 
+     * defer: Sayfa yüklendikten sonra script çalışır
+     * 
+     * NE ZAMAN ÇALIŞIR?
+     * → HTML yüklendikten sonra
+     * → Önce toast.js, sonra ogrenciler.js çalışır
+     -->
+    <script src="/js/toast.js" defer></script>
     <script src="/js/ogrenciler.js" defer></script>
 </body>
 </html>

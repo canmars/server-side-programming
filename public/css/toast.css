@@ -1,0 +1,168 @@
+/**
+ * TOAST (Bildirim) SİSTEMİ CSS
+ * 
+ * Bu dosya, toast bildirimlerinin görünümünü belirler.
+ * 
+ * Toast nedir?
+ * - Kullanıcıya bilgi vermek için kullanılan küçük bildirimler
+ * - Ekranın bir köşesinde (genellikle sağ üst) görünür
+ * - Birkaç saniye sonra otomatik kaybolur
+ * - Kullanıcı tıklayarak da kapatabilir
+ */
+
+/* BURAYA DİKKAT: Toast container
+ * Tüm toast'lar bu container içinde gösterilir
+ * position: fixed → Sayfa kaydırılsa bile sabit kalır
+ * z-index: 9999 → En üstte görünür (diğer elementlerin üstünde)
+ */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none; /* BURAYA DİKKAT: Container'a tıklanmasını engeller, sadece toast'lara tıklanabilir */
+}
+
+/* BURAYA DİKKAT: Toast elementi
+ * Her toast bir kart gibi görünür
+ * pointer-events: auto → Toast'a tıklanabilir
+ */
+.toast {
+    background: white;
+    border-radius: 8px;
+    padding: 15px 20px;
+    min-width: 300px;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    pointer-events: auto; /* BURAYA DİKKAT: Toast'a tıklanabilir yap */
+    animation: slideInRight 0.3s ease-out; /* BURAYA DİKKAT: Animasyon - sağdan kayarak gelir */
+    border-left: 4px solid #2196f3; /* BURAYA DİKKAT: Sol kenarda renkli çizgi */
+}
+
+/* BURAYA DİKKAT: CSS Animasyonu
+ * @keyframes → Animasyon tanımı
+ * slideInRight → Sağdan kayarak gelme animasyonu
+ */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* BURAYA DİKKAT: Toast çıkış animasyonu
+ * Toast kapanırken kayarak çıkar
+ */
+.toast.hiding {
+    animation: slideOutRight 0.3s ease-in forwards;
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* BURAYA DİKKAT: Toast ikonu
+ * Her toast'un solunda bir ikon olur
+ */
+.toast-icon {
+    font-size: 24px;
+    flex-shrink: 0; /* BURAYA DİKKAT: İkon küçülmez */
+}
+
+/* BURAYA DİKKAT: Toast içeriği
+ * Toast mesajı burada gösterilir
+ */
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.toast-message {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* BURAYA DİKKAT: Toast kapatma butonu
+ * Sağ üst köşede X butonu
+ */
+.toast-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.toast-close:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* BURAYA DİKKAT: Toast tipleri (renkler)
+ * Farklı durumlar için farklı renkler
+ */
+.toast-info {
+    border-left-color: #2196f3;
+}
+
+.toast-success {
+    border-left-color: #4caf50;
+}
+
+.toast-warning {
+    border-left-color: #ff9800;
+}
+
+.toast-error {
+    border-left-color: #f44336;
+}
+
+.toast-info .toast-icon {
+    color: #2196f3;
+}
+
+.toast-success .toast-icon {
+    color: #4caf50;
+}
+
+.toast-warning .toast-icon {
+    color: #ff9800;
+}
+
+.toast-error .toast-icon {
+    color: #f44336;
+}
+

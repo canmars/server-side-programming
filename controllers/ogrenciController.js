@@ -39,6 +39,30 @@ export const getAllOgrencilerController = async (req, res, next) => {
     } catch (error) {
         // BURAYA DİKKAT: Hata yönetimi
         // try-catch ile hatayı yakalıyoruz
+        // Hata detaylarını logluyoruz (debug için)
+        console.error('getAllOgrencilerController hatası:', error)
+        
+        // BURAYA DİKKAT: Veritabanı bağlantı hatası kontrolü
+        // Eğer veritabanı bağlantı hatası varsa, daha anlaşılır mesaj gönder
+        if (error.code === 'ECONNREFUSED' || error.code === 'ER_ACCESS_DENIED_ERROR' || error.code === 'PROTOCOL_CONNECTION_LOST') {
+            return res.status(500).json({
+                success: false,
+                message: 'Veritabanı bağlantı hatası! Lütfen .env dosyanızı kontrol edin ve veritabanı sunucusunun çalıştığından emin olun.',
+                error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+                hint: 'Proje kök dizininde .env dosyası oluşturun ve veritabanı bilgilerinizi ekleyin.'
+            })
+        }
+        
+        // BURAYA DİKKAT: Tablo bulunamadı hatası
+        if (error.code === 'ER_NO_SUCH_TABLE') {
+            return res.status(500).json({
+                success: false,
+                message: 'Veritabanı tablosu bulunamadı! Lütfen veritabanınızı kontrol edin.',
+                error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+                hint: 'docs/universite_bilgi_sistemi_db.sql dosyasını veritabanınıza import edin.'
+            })
+        }
+        
         // next(error) → Hata handler middleware'ine gönderir
         next(error)
     }
